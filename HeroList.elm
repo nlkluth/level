@@ -26,7 +26,11 @@ update action model =
       model
 
 
+createDiv hero =
+  Html.text "test"
+
 view : Signal.Address Action -> Model -> Html
 view address model =
-  div []
-    [Html.text "Hello world"]
+  let heroes = List.map (createDiv) model.heroes
+  in
+    div [] (heroes)

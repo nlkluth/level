@@ -10042,12 +10042,13 @@ Elm.HeroList.make = function (_elm) {
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var view = F2(function (address,model) {    return A2($Html.div,_U.list([]),_U.list([$Html.text("Hello world")]));});
+   var createDiv = function (hero) {    return $Html.text("test");};
+   var view = F2(function (address,model) {    var heroes = A2($List.map,createDiv,model.heroes);return A2($Html.div,_U.list([]),heroes);});
    var update = F2(function (action,model) {    var _p0 = action;return model;});
    var Fetch = {ctor: "Fetch"};
    var init = {heroes: _U.list([])};
    var Model = function (a) {    return {heroes: a};};
-   return _elm.HeroList.values = {_op: _op,Model: Model,init: init,Fetch: Fetch,update: update,view: view};
+   return _elm.HeroList.values = {_op: _op,Model: Model,init: init,Fetch: Fetch,update: update,createDiv: createDiv,view: view};
 };
 Elm.Main = Elm.Main || {};
 Elm.Main.make = function (_elm) {
