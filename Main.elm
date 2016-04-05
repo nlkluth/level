@@ -1,4 +1,10 @@
-import Html exposing (text)
+
+import HeroList exposing (init, update, view)
+import StartApp.Simple exposing (start)
 
 main =
-  text "Hello, World!"
+  start
+    { model = init
+    , update = update
+    , view = view
+    }
