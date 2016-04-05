@@ -1,10 +1,23 @@
 
+import Effects exposing (Never)
 import HeroList exposing (init, update, view)
-import StartApp.Simple exposing (start)
+import StartApp
+import Task
 
-main =
-  start
-    { model = init
+
+app =
+  StartApp.start
+    { init = init
     , update = update
     , view = view
+    , inputs = []
     }
+
+
+main =
+  app.html
+
+
+port tasks : Signal (Task.Task Never ())
+port tasks =
+  app.tasks

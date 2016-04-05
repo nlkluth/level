@@ -52,7 +52,4 @@ view : Signal.Address Action -> Model -> Html
 view address model =
   let heroes = List.map (createDiv) model.heroes
   in
-    div []
-      [ button [ onClick address AddHero ] [ text "test" ]
-      , div [] (heroes)
-      ]
+    div [] (heroes)
