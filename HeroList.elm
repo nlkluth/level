@@ -4,16 +4,13 @@ import Html exposing (..)
 import Html.Events exposing (onClick)
 
 type alias Model =
-  { heroes : List ( ID )
-  }
+  { heroes : List ( ID ) }
 
 type alias ID = Int
 
 
 init : Model
-init =
-  { heroes = []
-  }
+init = { heroes = [] }
 
 
 type Action = Fetch | AddHero
@@ -25,7 +22,7 @@ update action model =
       model
 
     AddHero ->
-      model
+      { model | heroes = (1) :: model.heroes }
 
 
 createDiv hero =

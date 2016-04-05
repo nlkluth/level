@@ -10110,7 +10110,14 @@ Elm.HeroList.make = function (_elm) {
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
    var createDiv = function (hero) {    return $Html.text("test");};
-   var update = F2(function (action,model) {    var _p0 = action;if (_p0.ctor === "Fetch") {    return model;} else {    return model;}});
+   var update = F2(function (action,model) {
+      var _p0 = action;
+      if (_p0.ctor === "Fetch") {
+            return model;
+         } else {
+            return _U.update(model,{heroes: A2($List._op["::"],1,model.heroes)});
+         }
+   });
    var AddHero = {ctor: "AddHero"};
    var view = F2(function (address,model) {
       var heroes = A2($List.map,createDiv,model.heroes);
