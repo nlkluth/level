@@ -1,7 +1,7 @@
 module HeroList where
 
 import Html exposing (..)
-
+import Html.Events exposing (onClick)
 
 type alias Model =
   { heroes : List ( ID )
@@ -16,13 +16,15 @@ init =
   }
 
 
-type Action
-  = Fetch
+type Action = Fetch | AddHero
 
 update : Action -> Model -> Model
 update action model =
   case action of
     Fetch ->
+      model
+
+    AddHero ->
       model
 
 
@@ -33,4 +35,7 @@ view : Signal.Address Action -> Model -> Html
 view address model =
   let heroes = List.map (createDiv) model.heroes
   in
-    div [] (heroes)
+    div []
+      [ button [ onClick address AddHero ] [ text "test" ]
+      , div [] (heroes)
+      ]
