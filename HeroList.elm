@@ -20,7 +20,9 @@ init =
   )
 
 
-type Action = Fetch | AddHero
+type Action
+  = Fetch
+  | AddHero (Maybe String)
 
 update : Action -> Model -> Model
 update action model =
@@ -28,7 +30,7 @@ update action model =
     Fetch ->
       model
 
-    AddHero ->
+    AddHero heroData ->
       { model | heroes = (1) :: model.heroes }
 
 
@@ -37,12 +39,13 @@ createDiv hero =
 
 fetchHeroList : Effects Action
 fetchHeroList =
-  Http.get Http.url "http://google.com/"
+  Http.get decodeUrl "http://google.com/"
     |> Task.toMaybe
+    |> Task.map AddHero
     |> Effects.task
 
 decodeUrl : Json.Decoder String
-decodeUrl = Json.string "{}"
+decodeUrl = Json.at [] Json.string
 
 
 view : Signal.Address Action -> Model -> Html
@@ -51,6 +54,5 @@ view address model =
   in
     div []
       [ button [ onClick address AddHero ] [ text "test" ]
-      , button [ onClick address Fetch ] [ text "populate" ]
       , div [] (heroes)
       ]
