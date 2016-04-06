@@ -24,14 +24,16 @@ type Action
   = Fetch
   | AddHero (Maybe String)
 
-update : Action -> Model -> Model
+update : Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
     Fetch ->
-      model
+      ( model, Effects.none )
 
     AddHero heroData ->
-      { model | heroes = (1) :: model.heroes }
+      ( { model | heroes = (1) :: model.heroes }
+        , Effects.none
+      )
 
 
 createDiv hero =
