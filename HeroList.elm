@@ -1,5 +1,6 @@
 module HeroList where
 
+
 import Html exposing (Html, div, button, text)
 import Html.Events exposing (onClick)
 import Http
@@ -7,8 +8,10 @@ import Task exposing (Task)
 import Effects exposing (Effects, Never)
 import Json.Decode as Json
 
+
 type alias Model =
   { heroes : List ( ID ) }
+
 
 type alias ID = Int
 
@@ -52,6 +55,7 @@ fetchHeroList =
     |> Task.toMaybe
     |> Task.map AddHero
     |> Effects.task
+
 
 decodeUrl : Json.Decoder String
 decodeUrl = Json.at [] Json.string
