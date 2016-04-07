@@ -1,8 +1,8 @@
 module HeroList where
 
-import Html exposing (..)
+import Html exposing (Html, div, button, text)
 import Html.Events exposing (onClick)
-import Http exposing (..)
+import Http
 import Task exposing (Task)
 import Effects exposing (Effects, Never)
 import Json.Decode as Json
