@@ -10767,6 +10767,7 @@ Elm.HeroList.make = function (_elm) {
    $Debug = Elm.Debug.make(_elm),
    $Effects = Elm.Effects.make(_elm),
    $Html = Elm.Html.make(_elm),
+   $Html$Events = Elm.Html.Events.make(_elm),
    $Http = Elm.Http.make(_elm),
    $Json$Decode = Elm.Json.Decode.make(_elm),
    $List = Elm.List.make(_elm),
@@ -10776,15 +10777,21 @@ Elm.HeroList.make = function (_elm) {
    $Task = Elm.Task.make(_elm);
    var _op = {};
    var decodeUrl = A2($Json$Decode.at,_U.list([]),$Json$Decode.string);
-   var createDiv = function (hero) {    return $Html.text("test");};
-   var view = F2(function (address,model) {    var heroes = A2($List.map,createDiv,model.heroes);return A2($Html.div,_U.list([]),heroes);});
    var update = F2(function (action,model) {
       var _p0 = action;
-      if (_p0.ctor === "Fetch") {
-            return {ctor: "_Tuple2",_0: model,_1: $Effects.none};
-         } else {
-            return {ctor: "_Tuple2",_0: _U.update(model,{heroes: A2($List._op["::"],1,model.heroes)}),_1: $Effects.none};
-         }
+      switch (_p0.ctor)
+      {case "Fetch": return {ctor: "_Tuple2",_0: model,_1: $Effects.none};
+         case "AddHero": return {ctor: "_Tuple2",_0: _U.update(model,{heroes: A2($List._op["::"],1,model.heroes)}),_1: $Effects.none};
+         default: return {ctor: "_Tuple2",_0: model,_1: $Effects.none};}
+   });
+   var ViewHero = function (a) {    return {ctor: "ViewHero",_0: a};};
+   var createDiv = F2(function (address,hero) {
+      return A2($Html.div,_U.list([]),_U.list([A2($Html.button,_U.list([A2($Html$Events.onClick,address,ViewHero(hero))]),_U.list([$Html.text("View")]))]));
+   });
+   var view = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([A2($Html.div,_U.list([]),_U.list([$Html.text("Heroes")])),A2($Html.div,_U.list([]),A2($List.map,createDiv(address),model.heroes))]));
    });
    var AddHero = function (a) {    return {ctor: "AddHero",_0: a};};
    var fetchHeroList = $Effects.task(A2($Task.map,AddHero,$Task.toMaybe(A2($Http.get,decodeUrl,"http://google.com/"))));
@@ -10796,6 +10803,7 @@ Elm.HeroList.make = function (_elm) {
                                  ,init: init
                                  ,Fetch: Fetch
                                  ,AddHero: AddHero
+                                 ,ViewHero: ViewHero
                                  ,update: update
                                  ,createDiv: createDiv
                                  ,fetchHeroList: fetchHeroList

@@ -36,12 +36,13 @@ update action model =
         , Effects.none
       )
 
-    ViewHero id ->
+    ViewHero hero ->
       ( model, Effects.none )
 
 
-createDiv hero =
-  button [ onClick address (ViewHero hero.id) ] [ text "View" ]
+createDiv address hero =
+  div []
+    [ button [ onClick address (ViewHero hero) ] [ text "View" ] ]
 
 fetchHeroList : Effects Action
 fetchHeroList =
@@ -56,9 +57,7 @@ decodeUrl = Json.at [] Json.string
 
 view : Signal.Address Action -> Model -> Html
 view address model =
-  let heroes = List.map (createDiv) model.heroes
-  in
-    div []
-      [ div [] [text "Heroes"]
-      , div [] (heroes)
-      ]
+  div []
+    [ div [] [text "Heroes"]
+    , div [] (List.map (createDiv address) model.heroes)
+    ]
