@@ -25,6 +25,7 @@ type Action
   | AddHero (Maybe String)
   | ViewHero (ID)
 
+
 update : Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
@@ -43,6 +44,7 @@ update action model =
 createDiv address hero =
   div []
     [ button [ onClick address (ViewHero hero) ] [ text "View" ] ]
+
 
 fetchHeroList : Effects Action
 fetchHeroList =
