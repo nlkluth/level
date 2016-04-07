@@ -23,6 +23,7 @@ init =
 type Action
   = Fetch
   | AddHero (Maybe String)
+  | ViewHero (ID)
 
 update : Action -> Model -> (Model, Effects Action)
 update action model =
@@ -35,9 +36,12 @@ update action model =
         , Effects.none
       )
 
+    ViewHero id ->
+      ( model, Effects.none )
+
 
 createDiv hero =
-  Html.text "test"
+  button [ onClick address (ViewHero hero.id) ] [ text "View" ]
 
 fetchHeroList : Effects Action
 fetchHeroList =
