@@ -58,4 +58,7 @@ view : Signal.Address Action -> Model -> Html
 view address model =
   let heroes = List.map (createDiv) model.heroes
   in
-    div [] (heroes)
+    div []
+      [ div [] [text "Heroes"]
+      , div [] (heroes)
+      ]

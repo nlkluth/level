@@ -32,4 +32,4 @@ decodeUrl = Json.at [] Json.string
 
 view : Signal.Address Action -> Model -> Html
 view address model =
-  div [] (model)
+  div [] [model]
