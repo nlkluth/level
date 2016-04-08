@@ -6,5 +6,5 @@ import Heroes.Models exposing (..)
 
 type Action
   = Fetch
-  | AddHero (Maybe String)
+  | AddHero (Maybe Hero)
   | ViewHero (HeroID)

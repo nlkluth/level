@@ -11,7 +11,11 @@ import Heroes.Actions exposing (..)
 import Heroes.Models exposing (..)
 
 
-init : (Hero, Effects Action)
+type alias ViewModel =
+  { heroes : List Hero }
+
+
+init : (ViewModel, Effects Action)
 init =
   ( { heroes = [] }
   , fetchHeroList
@@ -35,9 +39,9 @@ decodeUrl : Json.Decoder String
 decodeUrl = Json.at [] Json.string
 
 
-view : Signal.Address Action -> Hero -> Html
+view : Signal.Address Action -> ViewModel -> Html
 view address model =
   div []
     [ div [] [ text "Heroes" ]
-    , div [] (List.map (createDiv address) model.heroes)
+    --, div [] (List.map (createDiv address) model.heroes)
     ]

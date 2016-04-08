@@ -5,14 +5,18 @@ import Heroes.Actions exposing (..)
 import Heroes.Models exposing (..)
 
 
-update : Action -> Hero -> (Hero, Effects Action)
+type alias UpdateModel =
+  { heroes : List Hero }
+
+
+update : Action -> UpdateModel -> (UpdateModel, Effects Action)
 update action model =
   case action of
     Fetch ->
       ( model, Effects.none )
 
     AddHero heroData ->
-      ( { model | heroes = (1) :: model.heroes }
+      ( { model | heroes = (heroData) :: model.heroes }
         , Effects.none
       )
 

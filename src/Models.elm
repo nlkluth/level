@@ -6,5 +6,12 @@ import Routing
 
 type alias AppModel =
   { heroes: List Hero
-  , routing = Routing.initalModel
+  , routing: Routing.Model
+  }
+
+
+initialModel : AppModel
+initialModel =
+  { heroes = []
+  , routing = Routing.initialModel
   }
