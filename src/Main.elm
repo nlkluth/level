@@ -1,3 +1,4 @@
+module Main (..) where
 
 import Effects exposing (Never)
 import HeroList exposing (init, update, view)
