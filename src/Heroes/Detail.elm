@@ -1,35 +1,34 @@
 module Heroes.Detail where
 
-import Html exposing (div)
-
-type alias Model = { ID: ID }
-type alias ID = Int
-
-
-init : Model
-init = fetchHero
+import Html exposing (Html, div)
+import Heroes.Actions exposing (..)
+import Heroes.Models exposing (..)
 
 
-type Action = Fetch
-
-update : Action -> Model -> Model
-update action model =
-  case action of
-    Fetch ->
-      ( if model then model else loadHero )
+type alias ViewModel =
+  { hero : Hero }
 
 
-loadHero : Effects Action
-loadHero =
-  Http.get decodeUrl "http://google.com"
-    |> Task.toMaybe
-    |> Effects.task
+--type Action = Fetch
+
+--update : Action -> Model -> Model
+--update action model =
+--  case action of
+--    Fetch ->
+--      ( if model then model else loadHero )
 
 
-decodeUrl : Json.Decoder String
-decodeUrl = Json.at [] Json.string
+--loadHero : Effects Action
+--loadHero =
+--  Http.get decodeUrl "http://google.com"
+--    |> Task.toMaybe
+--    |> Effects.task
 
 
-view : Signal.Address Action -> Model -> Html
+--decodeUrl : Json.Decoder String
+--decodeUrl = Json.at [] Json.string
+
+
+view : Signal.Address Action -> ViewModel -> Html
 view address model =
-  div [] [model]
+  div [] [Html.text model.hero.name]
