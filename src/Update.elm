@@ -4,21 +4,24 @@ import Effects exposing (Effects)
 import Models exposing (..)
 import Actions exposing (..)
 import Heroes.Update
+import Routing
 
 
 update : Action -> AppModel -> ( AppModel, Effects Action )
 update action model =
   case action of
     HeroesAction subAction ->
-      let
-        updateModel =
-          { heroes = model.heroes
-          }
+      ( model, Effects.none )
 
-        ( updatedHeroes, fx ) =
-          Heroes.Update.update subAction updateModel
-      in
-        ( { model | heroes = updatedPlayers }, Effects.map HeroesAction fx )
+      --let
+      --  updateModel =
+      --    { heroes = model.heroes
+      --    }
+
+      --  ( updatedHeroes, fx ) =
+      --    Heroes.Update.update subAction updateModel
+      --in
+      --  ( { model | heroes = updatedHeroes }, Effects.map HeroesAction fx )
 
     NoOp ->
       ( model, Effects.none )

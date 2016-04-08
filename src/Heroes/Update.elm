@@ -16,7 +16,8 @@ update action model =
       ( model, Effects.none )
 
     AddHero heroData ->
-      ( { model | heroes = (heroData) :: model.heroes }
+      ( { model |
+            heroes = ({id = 1, name = "test", title = ""}) :: model.heroes }
         , Effects.none
       )
 

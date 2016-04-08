@@ -24,7 +24,7 @@ init =
 
 createDiv address hero =
   div []
-    [ button [ onClick address (ViewHero hero) ] [ text "View" ] ]
+    [ button [ onClick address (ViewHero 2) ] [ text "View" ] ]
 
 
 fetchHeroList : Effects Action
@@ -43,5 +43,5 @@ view : Signal.Address Action -> ViewModel -> Html
 view address model =
   div []
     [ div [] [ text "Heroes" ]
-    --, div [] (List.map (createDiv address) model.heroes)
+    , div [] (List.map (createDiv address) model.heroes)
     ]
