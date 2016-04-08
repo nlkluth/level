@@ -33,16 +33,24 @@ page address model =
 heroesListPage : Signal.Address Action -> AppModel -> Html.Html
 heroesListPage address model =
   let viewModel =
-    { heroes = model.herores }
+    { heroes = model.heroes }
   in
     Heroes.List.view (Signal.forwardTo address HeroesAction) viewModel
 
 
 heroesDetailPage : Signal.Address Action -> AppModel -> HeroID -> Html.Html
 heroesDetailPage address model heroId =
-  let viewModel = { hero = "test" }
+  let maybeHero = List.head model.heroes
   in
-    Heroes.Detail.view (Signal.forwardTo address HeroesAction) viewModel
+    case maybeHero of
+      Just hero ->
+        let viewModel =
+          { hero = hero }
+        in
+          Heroes.Detail.view (Signal.forwardTo address HeroesAction) viewModel
+
+      Nothing ->
+        notFoundView
 
 
 notFoundView : Html.Html

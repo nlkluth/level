@@ -11940,6 +11940,28 @@ Elm.Actions.make = function (_elm) {
    return _elm.Actions.values = {_op: _op,NoOp: NoOp,RoutingAction: RoutingAction,HeroesAction: HeroesAction};
 };
 Elm.Heroes = Elm.Heroes || {};
+Elm.Heroes.Detail = Elm.Heroes.Detail || {};
+Elm.Heroes.Detail.make = function (_elm) {
+   "use strict";
+   _elm.Heroes = _elm.Heroes || {};
+   _elm.Heroes.Detail = _elm.Heroes.Detail || {};
+   if (_elm.Heroes.Detail.values) return _elm.Heroes.Detail.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Heroes$Actions = Elm.Heroes.Actions.make(_elm),
+   $Heroes$Models = Elm.Heroes.Models.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var view = F2(function (address,model) {    return A2($Html.div,_U.list([]),_U.list([$Html.text(model.hero.name)]));});
+   var ViewModel = function (a) {    return {hero: a};};
+   return _elm.Heroes.Detail.values = {_op: _op,ViewModel: ViewModel,view: view};
+};
+Elm.Heroes = Elm.Heroes || {};
 Elm.Heroes.List = Elm.Heroes.List || {};
 Elm.Heroes.List.make = function (_elm) {
    "use strict";
@@ -12075,20 +12097,41 @@ Elm.View.make = function (_elm) {
    $Actions = Elm.Actions.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
+   $Heroes$Detail = Elm.Heroes.Detail.make(_elm),
    $Heroes$List = Elm.Heroes.List.make(_elm),
+   $Heroes$Models = Elm.Heroes.Models.make(_elm),
    $Html = Elm.Html.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Models = Elm.Models.make(_elm),
    $Result = Elm.Result.make(_elm),
+   $Routing = Elm.Routing.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var page = F2(function (address,model) {
+   var notFoundView = A2($Html.div,_U.list([]),_U.list([$Html.text("Not found")]));
+   var heroesDetailPage = F3(function (address,model,heroId) {
+      var maybeHero = $List.head(model.heroes);
+      var _p0 = maybeHero;
+      if (_p0.ctor === "Just") {
+            var viewModel = {hero: _p0._0};
+            return A2($Heroes$Detail.view,A2($Signal.forwardTo,address,$Actions.HeroesAction),viewModel);
+         } else {
+            return notFoundView;
+         }
+   });
+   var heroesListPage = F2(function (address,model) {
       var viewModel = {heroes: model.heroes};
       return A2($Heroes$List.view,A2($Signal.forwardTo,address,$Actions.HeroesAction),viewModel);
    });
-   var view = F2(function (address,model) {    return A2($Html.div,_U.list([]),_U.list([A2(page,address,model)]));});
-   return _elm.View.values = {_op: _op,view: view,page: page};
+   var page = F2(function (address,model) {
+      var _p1 = model.routing.route;
+      switch (_p1.ctor)
+      {case "HeroListRoute": return A2(heroesListPage,address,model);
+         case "HeroDetailRoute": return A3(heroesDetailPage,address,model,_p1._0);
+         default: return notFoundView;}
+   });
+   var view = F2(function (address,model) {    var _p2 = A2($Debug.log,"model",model);return A2($Html.div,_U.list([]),_U.list([A2(page,address,model)]));});
+   return _elm.View.values = {_op: _op,view: view,page: page,heroesListPage: heroesListPage,heroesDetailPage: heroesDetailPage,notFoundView: notFoundView};
 };
 Elm.Main = Elm.Main || {};
 Elm.Main.make = function (_elm) {
