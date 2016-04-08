@@ -51,7 +51,7 @@ createDiv address hero =
 
 fetchHeroList : Effects Action
 fetchHeroList =
-  Http.get decodeUrl "http://google.com/"
+  Http.get decodeUrl "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=image&api_key=587833f9-98ff-4cb8-92c8-ae1413a925af"
     |> Task.toMaybe
     |> Task.map AddHero
     |> Effects.task
@@ -64,6 +64,6 @@ decodeUrl = Json.at [] Json.string
 view : Signal.Address Action -> Model -> Html
 view address model =
   div []
-    [ div [] [text "Heroes"]
+    [ div [] [ text "Heroes" ]
     , div [] (List.map (createDiv address) model.heroes)
     ]

@@ -10794,7 +10794,11 @@ Elm.HeroList.make = function (_elm) {
       _U.list([A2($Html.div,_U.list([]),_U.list([$Html.text("Heroes")])),A2($Html.div,_U.list([]),A2($List.map,createDiv(address),model.heroes))]));
    });
    var AddHero = function (a) {    return {ctor: "AddHero",_0: a};};
-   var fetchHeroList = $Effects.task(A2($Task.map,AddHero,$Task.toMaybe(A2($Http.get,decodeUrl,"http://google.com/"))));
+   var fetchHeroList = $Effects.task(A2($Task.map,
+   AddHero,
+   $Task.toMaybe(A2($Http.get,
+   decodeUrl,
+   "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=image&api_key=587833f9-98ff-4cb8-92c8-ae1413a925af"))));
    var Fetch = {ctor: "Fetch"};
    var init = {ctor: "_Tuple2",_0: {heroes: _U.list([])},_1: fetchHeroList};
    var Model = function (a) {    return {heroes: a};};
