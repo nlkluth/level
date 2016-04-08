@@ -7,41 +7,15 @@ import Http
 import Task exposing (Task)
 import Effects exposing (Effects, Never)
 import Json.Decode as Json
+import Heroes.Actions exposing (..)
+import Heroes.Models exposing (..)
 
 
-type alias Model =
-  { heroes : List ( ID ) }
-
-
-type alias ID = Int
-
-
-init : (Model, Effects Action)
+init : (Hero, Effects Action)
 init =
   ( { heroes = [] }
   , fetchHeroList
   )
-
-
-type Action
-  = Fetch
-  | AddHero (Maybe String)
-  | ViewHero (ID)
-
-
-update : Action -> Model -> (Model, Effects Action)
-update action model =
-  case action of
-    Fetch ->
-      ( model, Effects.none )
-
-    AddHero heroData ->
-      ( { model | heroes = (1) :: model.heroes }
-        , Effects.none
-      )
-
-    ViewHero hero ->
-      ( model, Effects.none )
 
 
 createDiv address hero =
@@ -61,7 +35,7 @@ decodeUrl : Json.Decoder String
 decodeUrl = Json.at [] Json.string
 
 
-view : Signal.Address Action -> Model -> Html
+view : Signal.Address Action -> Hero -> Html
 view address model =
   div []
     [ div [] [ text "Heroes" ]

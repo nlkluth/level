@@ -6,7 +6,7 @@ import Hop
 import Hop.Types exposing (Location, PathMatcher, Router, newLocation)
 import Hop.Navigate exposing (navigateTo)
 import Hop.Matchers exposing (match1, match2, match3, int)
-import HeroList exposing ID
+import Heroes.List exposing (ID)
 
 type Route
   = HeroListRoute
