@@ -10757,11 +10757,13 @@ Elm.StartApp.make = function (_elm) {
    var Config = F4(function (a,b,c,d) {    return {init: a,update: b,view: c,inputs: d};});
    return _elm.StartApp.values = {_op: _op,start: start,Config: Config,App: App};
 };
-Elm.HeroList = Elm.HeroList || {};
-Elm.HeroList.make = function (_elm) {
+Elm.Heroes = Elm.Heroes || {};
+Elm.Heroes.List = Elm.Heroes.List || {};
+Elm.Heroes.List.make = function (_elm) {
    "use strict";
-   _elm.HeroList = _elm.HeroList || {};
-   if (_elm.HeroList.values) return _elm.HeroList.values;
+   _elm.Heroes = _elm.Heroes || {};
+   _elm.Heroes.List = _elm.Heroes.List || {};
+   if (_elm.Heroes.List.values) return _elm.Heroes.List.values;
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
@@ -10802,17 +10804,17 @@ Elm.HeroList.make = function (_elm) {
    var Fetch = {ctor: "Fetch"};
    var init = {ctor: "_Tuple2",_0: {heroes: _U.list([])},_1: fetchHeroList};
    var Model = function (a) {    return {heroes: a};};
-   return _elm.HeroList.values = {_op: _op
-                                 ,Model: Model
-                                 ,init: init
-                                 ,Fetch: Fetch
-                                 ,AddHero: AddHero
-                                 ,ViewHero: ViewHero
-                                 ,update: update
-                                 ,createDiv: createDiv
-                                 ,fetchHeroList: fetchHeroList
-                                 ,decodeUrl: decodeUrl
-                                 ,view: view};
+   return _elm.Heroes.List.values = {_op: _op
+                                    ,Model: Model
+                                    ,init: init
+                                    ,Fetch: Fetch
+                                    ,AddHero: AddHero
+                                    ,ViewHero: ViewHero
+                                    ,update: update
+                                    ,createDiv: createDiv
+                                    ,fetchHeroList: fetchHeroList
+                                    ,decodeUrl: decodeUrl
+                                    ,view: view};
 };
 Elm.Main = Elm.Main || {};
 Elm.Main.make = function (_elm) {
@@ -10823,7 +10825,7 @@ Elm.Main.make = function (_elm) {
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
    $Effects = Elm.Effects.make(_elm),
-   $HeroList = Elm.HeroList.make(_elm),
+   $Heroes$List = Elm.Heroes.List.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Result = Elm.Result.make(_elm),
@@ -10831,7 +10833,7 @@ Elm.Main.make = function (_elm) {
    $StartApp = Elm.StartApp.make(_elm),
    $Task = Elm.Task.make(_elm);
    var _op = {};
-   var app = $StartApp.start({init: $HeroList.init,update: $HeroList.update,view: $HeroList.view,inputs: _U.list([])});
+   var app = $StartApp.start({init: $Heroes$List.init,update: $Heroes$List.update,view: $Heroes$List.view,inputs: _U.list([])});
    var main = app.html;
    var tasks = Elm.Native.Task.make(_elm).performSignal("tasks",app.tasks);
    return _elm.Main.values = {_op: _op,app: app,main: main};

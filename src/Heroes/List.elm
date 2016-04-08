@@ -1,4 +1,4 @@
-module HeroList where
+module Heroes.List where
 
 
 import Html exposing (Html, div, button, text)

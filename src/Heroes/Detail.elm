@@ -1,4 +1,4 @@
-module HeroDetail where
+module Heroes.Detail where
 
 import Html exposing (div)
 
