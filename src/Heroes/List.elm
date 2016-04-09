@@ -15,24 +15,9 @@ type alias ViewModel =
   { heroes : List Hero }
 
 
-init : (ViewModel, Effects Action)
-init =
-  ( { heroes = [] }
-  , fetchHeroList
-  )
-
-
 createDiv address hero =
   div []
-    [ button [ onClick address (ViewHero 2) ] [ text "View" ] ]
-
-
-fetchHeroList : Effects Action
-fetchHeroList =
-  Http.get decodeUrl "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=image&api_key=587833f9-98ff-4cb8-92c8-ae1413a925af"
-    |> Task.toMaybe
-    |> Task.map AddHero
-    |> Effects.task
+    [ button [ onClick address (ViewHero hero.id) ] [ text "View" ] ]
 
 
 decodeUrl : Json.Decoder String

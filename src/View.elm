@@ -9,15 +9,24 @@ import Routing
 import Heroes.List
 import Heroes.Detail
 
+
 view : Signal.Address Action -> AppModel -> Html
 view address model =
   let _ = Debug.log "model" model
   in
     div []
-      [ page address model ]
+      [ div [] [ navigation address model ]
+      , div [] [ page address model ]
+      ]
 
 
-page : Signal.Address Action -> AppModel -> Html.Html
+navigation : Signal.Address Action -> AppModel -> Html
+navigation address model =
+  div []
+    [ button [] [Html.text "Home"] ]
+
+
+page : Signal.Address Action -> AppModel -> Html
 page address model =
   case model.routing.route of
     Routing.HeroListRoute ->
@@ -30,7 +39,7 @@ page address model =
       notFoundView
 
 
-heroesListPage : Signal.Address Action -> AppModel -> Html.Html
+heroesListPage : Signal.Address Action -> AppModel -> Html
 heroesListPage address model =
   let viewModel =
     { heroes = model.heroes }
@@ -38,7 +47,7 @@ heroesListPage address model =
     Heroes.List.view (Signal.forwardTo address HeroesAction) viewModel
 
 
-heroesDetailPage : Signal.Address Action -> AppModel -> HeroID -> Html.Html
+heroesDetailPage : Signal.Address Action -> AppModel -> HeroID -> Html
 heroesDetailPage address model heroId =
   let maybeHero = List.head model.heroes
   in

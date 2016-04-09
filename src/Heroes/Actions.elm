@@ -1,10 +1,13 @@
 module Heroes.Actions (..) where
 
 import Effects exposing (Effects, Never)
-import Heroes.Models exposing (..)
+import Http
+import Heroes.Models exposing (HeroID, Hero)
+import Hop
 
 
 type Action
-  = Fetch
-  | AddHero (Maybe String)
-  | ViewHero (HeroID)
+  = FetchAllDone (Result Http.Error (List Hero))
+  | ViewHero HeroID
+  | ListHeroes
+  | HopAction ()

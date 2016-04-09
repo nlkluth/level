@@ -8,11 +8,17 @@ import Actions exposing (..)
 import Models exposing (..)
 import Update exposing (..)
 import View exposing (..)
+import Routing
+import Heroes.Effects
 
 
 init : ( AppModel, Effects Action )
 init =
-  ( initialModel, Effects.none )
+  let
+    fxs = [ Effects.map HeroesAction Heroes.Effects.fetchAll ]
+    fx = Effects.batch fxs
+  in
+    ( Models.initialModel, fx )
 
 
 app =
@@ -20,7 +26,7 @@ app =
     { init = init
     , update = update
     , view = view
-    , inputs = []
+    , inputs = [ routerSignal ]
     }
 
 
@@ -28,6 +34,16 @@ main =
   app.html
 
 
+routerSignal : Signal Action
+routerSignal =
+  Signal.map RoutingAction Routing.signal
+
+
 port tasks : Signal (Task.Task Never ())
 port tasks =
   app.tasks
+
+
+port routeRunTask : Task.Task () ()
+port routeRunTask =
+  Routing.run

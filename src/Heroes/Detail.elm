@@ -1,8 +1,9 @@
 module Heroes.Detail where
 
-import Html exposing (Html, div)
+import Html exposing (Html, div, button)
 import Heroes.Actions exposing (..)
 import Heroes.Models exposing (..)
+import Html.Events exposing (onClick)
 
 
 type alias ViewModel =
@@ -31,4 +32,7 @@ type alias ViewModel =
 
 view : Signal.Address Action -> ViewModel -> Html
 view address model =
-  div [] [Html.text model.hero.name]
+  div []
+    [ button [onClick address ListHeroes] [Html.text "Back"]
+    , div [] [Html.text model.hero.name]
+    ]

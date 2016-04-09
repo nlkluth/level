@@ -11,17 +11,13 @@ update : Action -> AppModel -> ( AppModel, Effects Action )
 update action model =
   case action of
     HeroesAction subAction ->
-      ( model, Effects.none )
+      let
+        updateModel = model.heroes
 
-      --let
-      --  updateModel =
-      --    { heroes = model.heroes
-      --    }
-
-      --  ( updatedHeroes, fx ) =
-      --    Heroes.Update.update subAction updateModel
-      --in
-      --  ( { model | heroes = updatedHeroes }, Effects.map HeroesAction fx )
+        ( updatedHeroes, fx ) =
+          Heroes.Update.update subAction updateModel
+      in
+        ( { model | heroes = updatedHeroes }, Effects.map HeroesAction fx )
 
     NoOp ->
       ( model, Effects.none )
