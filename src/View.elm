@@ -6,6 +6,7 @@ import Models exposing (..)
 import Heroes.List
 import Heroes.Models exposing (HeroID)
 import Routing
+import String
 import Heroes.List
 import Heroes.Detail
 
@@ -16,7 +17,10 @@ view address model =
   in
     div []
       [ div [] [ navigation address model ]
-      , div [] [ page address model ]
+      , div []
+        [ flash address model
+        , page address model
+        ]
       ]
 
 
@@ -24,6 +28,14 @@ navigation : Signal.Address Action -> AppModel -> Html
 navigation address model =
   div []
     [ button [] [Html.text "Home"] ]
+
+
+flash : Signal.Address Action -> AppModel -> Html
+flash address model =
+  if String.isEmpty model.errorMessage then
+    span [] []
+  else
+    div [] [text model.errorMessage]
 
 
 page : Signal.Address Action -> AppModel -> Html
