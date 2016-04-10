@@ -1,7 +1,6 @@
 module Models (..) where
 
 import Heroes.Models exposing (Hero)
-import String
 import Routing
 
 

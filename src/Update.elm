@@ -22,6 +22,9 @@ update action model =
     NoOp ->
       ( model, Effects.none )
 
+    ShowError message ->
+      ( { model | errorMessage = message }, Effects.none )
+
     RoutingAction subAction ->
       let
         ( updatedRouting, fx ) =
