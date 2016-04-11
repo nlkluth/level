@@ -1,7 +1,7 @@
 module Heroes.List where
 
 
-import Html exposing (Html, div, button, text)
+import Html exposing (Html, div, a, text)
 import Html.Events exposing (onClick)
 import Http
 import Task exposing (Task)
@@ -17,7 +17,11 @@ type alias ViewModel =
 
 createDiv address hero =
   div []
-    [ button [ onClick address (ViewHero hero.id) ] [ text "View" ] ]
+    [ a [ onClick address (ViewHero hero.id) ]
+      [ div [] [ text hero.name ]
+      , div [] [ text hero.title]
+      ]
+    ]
 
 
 decodeUrl : Json.Decoder String

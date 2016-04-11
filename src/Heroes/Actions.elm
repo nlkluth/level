@@ -8,6 +8,7 @@ import Hop
 
 type Action
   = FetchAllDone (Result Http.Error (List Hero))
+  | FetchHeroDone (Result Http.Error Hero)
   | ViewHero HeroID
   | ListHeroes
   | HopAction ()

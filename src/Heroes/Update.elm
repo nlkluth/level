@@ -31,6 +31,14 @@ update action model =
           in
             ( model, Effects.none )
 
+    FetchHeroDone result ->
+      case result of
+        Ok hero ->
+          ( model, Effects.none )
+
+        Err errror ->
+          ( model, Effects.none )
+
     TaskDone () ->
       ( model, Effects.none )
 

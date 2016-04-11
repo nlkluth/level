@@ -26,8 +26,7 @@ view address model =
 
 navigation : Signal.Address Action -> AppModel -> Html
 navigation address model =
-  div []
-    [ button [] [Html.text "Home"] ]
+  div [] []
 
 
 flash : Signal.Address Action -> AppModel -> Html

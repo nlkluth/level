@@ -8,12 +8,25 @@ import Heroes.Models exposing (HeroID, Hero)
 import Heroes.Actions exposing (..)
 
 
+fetchHeroData : HeroID -> Effects Action
+fetchHeroData heroId =
+  Http.get memberDecoder (fetchHeroUrl heroId)
+    |> Task.toResult
+    |> Task.map FetchHeroDone
+    |> Effects.task
+
+
 fetchAll : Effects Action
 fetchAll =
   Http.get collectionDecoder fetchAllUrl
     |> Task.toResult
     |> Task.map FetchAllDone
     |> Effects.task
+
+
+fetchHeroUrl : HeroID -> String
+fetchHeroUrl heroId =
+  "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/" ++ toString heroId ++ "?api_key=587833f9-98ff-4cb8-92c8-ae1413a925af"
 
 
 fetchAllUrl : String
