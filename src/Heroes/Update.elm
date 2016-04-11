@@ -18,13 +18,21 @@ update action model =
     FetchAllDone result ->
       case result of
         Ok heroes ->
-          (model, Effects.none)
+          ( model, Effects.none )
 
         Err error ->
-          (model, Effects.none)
+          let
+            errorMessage = toString error
+
+            fx = Signal.send model.showErrorAddress errorMessage
+              |> Effects.task
+              |> Effects.map TaskDone
+
+          in
+            ( model, Effects.none )
 
     TaskDone () ->
-      (model, Effects.none)
+      ( model, Effects.none )
 
     ViewHero id ->
       let path = "/hero/" ++ (toString id)
