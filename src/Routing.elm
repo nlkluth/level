@@ -8,6 +8,7 @@ import Hop.Navigate exposing (navigateTo)
 import Hop.Matchers exposing (match1, match2, match3, int)
 import Heroes.Models exposing (HeroID)
 
+
 type Route
   = HeroListRoute
   | HeroDetailRoute HeroID

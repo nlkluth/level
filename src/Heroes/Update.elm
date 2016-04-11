@@ -2,7 +2,7 @@ module Heroes.Update (..) where
 
 import Effects exposing (Effects, Never)
 import Heroes.Actions exposing (..)
-import Heroes.Models exposing (..)
+import Heroes.Models exposing (Hero)
 import Hop.Navigate exposing (navigateTo)
 
 

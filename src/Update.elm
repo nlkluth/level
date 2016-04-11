@@ -1,7 +1,7 @@
 module Update (..) where
 
 import Effects exposing (Effects)
-import Models exposing (..)
+import Models exposing (AppModel)
 import Actions exposing (..)
 import Heroes.Update
 import Routing
@@ -12,12 +12,12 @@ update action model =
   case action of
     HeroesAction subAction ->
       let
-        updateModel = model.heroes
+        updateModel = { heroes = model.heroes }
 
         ( updatedHeroes, fx ) =
           Heroes.Update.update subAction updateModel
       in
-        ( { model | heroes = updatedHeroes }, Effects.map HeroesAction fx )
+        ( { model | heroes = updatedHeroes.heroes }, Effects.map HeroesAction fx )
 
     NoOp ->
       ( model, Effects.none )
