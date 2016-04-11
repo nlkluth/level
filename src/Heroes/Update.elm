@@ -7,7 +7,9 @@ import Hop.Navigate exposing (navigateTo)
 
 
 type alias UpdateModel =
-  { heroes : List Hero }
+  { heroes : List Hero
+  , showErrorAddress : Signal.Address String
+  }
 
 
 update : Action -> UpdateModel -> (UpdateModel, Effects Action)
@@ -19,7 +21,18 @@ update action model =
           (model, Effects.none)
 
         Err error ->
-          (model, Effects.none)
+          let
+            errorMessage = toString error
+
+            fx = Signal.send model.showErrorAddress errorMessage
+              |> Effects.task
+              |> Effects.map TaskDone
+
+          in
+            ( model.heroes, fx )
+
+    TaskDone () ->
+      ( model.heroes, Effects.none )
 
     ViewHero id ->
       let path = "/hero/" ++ (toString id)

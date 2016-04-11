@@ -11,3 +11,4 @@ type Action
   | ViewHero HeroID
   | ListHeroes
   | HopAction ()
+  | TaskDone ()
