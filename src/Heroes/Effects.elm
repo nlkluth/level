@@ -21,10 +21,9 @@ fetchAllUrl =
   "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=image&api_key=587833f9-98ff-4cb8-92c8-ae1413a925af"
 
 
-collectionDecoder : Decode.Decoder (List (String, Hero))
+collectionDecoder : Decode.Decoder (List Hero)
 collectionDecoder =
-  Decode.object1 identity
-    ("data" := Decode.keyValuePairs memberDecoder)
+  Decode.at ["data"] (Decode.keyValuePairs memberDecoder)
 
 
 memberDecoder : Decode.Decoder Hero
