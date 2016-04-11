@@ -24,12 +24,7 @@ fetchAllUrl =
 collectionDecoder : Decode.Decoder (List Hero)
 collectionDecoder =
   Decode.at ["data"] (Decode.keyValuePairs memberDecoder)
-    |> Decode.map extractHeroData
-
-
-extractHeroData : ( a, b ) -> b
-extractHeroData (string, hero) =
-  hero
+    |> Decode.map (List.map snd)
 
 
 memberDecoder : Decode.Decoder Hero

@@ -18,7 +18,7 @@ update action model =
     FetchAllDone result ->
       case result of
         Ok heroes ->
-          ( model, Effects.none )
+          ( { model | heroes = heroes }, Effects.none )
 
         Err error ->
           let
