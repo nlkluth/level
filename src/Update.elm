@@ -2,6 +2,7 @@ module Update (..) where
 
 import Effects exposing (Effects)
 import Models exposing (AppModel)
+import Mailboxes exposing (..)
 import Actions exposing (..)
 import Heroes.Update
 import Routing
@@ -12,7 +13,10 @@ update action model =
   case action of
     HeroesAction subAction ->
       let
-        updateModel = { heroes = model.heroes }
+        updateModel =
+          { heroes = model.heroes
+          , showErrorAddress = Signal.forwardTo actionsMailbox.address ShowError
+          }
 
         ( updatedHeroes, fx ) =
           Heroes.Update.update subAction updateModel
