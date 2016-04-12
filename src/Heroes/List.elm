@@ -1,7 +1,8 @@
 module Heroes.List where
 
 
-import Html exposing (Html, div, a, text)
+import Html exposing (Html, div, a, text, img)
+import Html.Attributes exposing (src)
 import Html.Events exposing (onClick)
 import Http
 import Task exposing (Task)
@@ -20,6 +21,7 @@ createDiv address hero =
     [ a [ onClick address (ViewHero hero.id) ]
       [ div [] [ text hero.name ]
       , div [] [ text hero.title]
+      , img [src ("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/" ++ hero.image.full)] []
       ]
     ]
 

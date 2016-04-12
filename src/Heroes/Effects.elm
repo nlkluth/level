@@ -4,7 +4,7 @@ import Effects exposing (Effects)
 import Http
 import Json.Decode as Decode exposing ((:=))
 import Task
-import Heroes.Models exposing (HeroID, Hero)
+import Heroes.Models exposing (HeroID, Hero, HeroImage)
 import Heroes.Actions exposing (..)
 
 
@@ -42,8 +42,16 @@ collectionDecoder =
 
 memberDecoder : Decode.Decoder Hero
 memberDecoder =
-  Decode.object3
+  Decode.object4
     Hero
     ("id" := Decode.int)
     ("name" := Decode.string)
     ("title" := Decode.string)
+    ("image" := imageDecoder)
+
+
+imageDecoder: Decode.Decoder HeroImage
+imageDecoder =
+  Decode.object1
+    HeroImage
+    ("full" := Decode.string)
