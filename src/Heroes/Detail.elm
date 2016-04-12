@@ -12,10 +12,9 @@ type alias ViewModel =
   { hero : Hero }
 
 
-init : (Effects Action, ViewModel)
-init address model =
-  Heroes.Effects.fetchHeroData model.hero.HeroID
-
+init :  HeroID -> ( Hero -> ViewModel, Effects Action )
+init heroId =
+  ( ViewModel, (Heroes.Effects.fetchHeroData heroId) )
 
 
 view : Signal.Address Action -> ViewModel -> Html
