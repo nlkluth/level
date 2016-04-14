@@ -6,12 +6,10 @@ module.exports = {
       './index.js'
     ]
   },
-
   output: {
     path: path.resolve(__dirname + '/dist'),
     filename: '[name].js',
   },
-
   module: {
     loaders: [
       {
@@ -41,10 +39,8 @@ module.exports = {
         loader: 'file-loader',
       },
     ],
-
     noParse: /\.elm$/,
   },
-
   devServer: {
     inline: true,
     stats: {

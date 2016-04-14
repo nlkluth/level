@@ -2,7 +2,7 @@ module Heroes.List where
 
 
 import Html exposing (Html, div, a, text, img)
-import Html.Attributes exposing (src)
+import Html.Attributes exposing (src, class)
 import Html.Events exposing (onClick)
 import Http
 import Task exposing (Task)
@@ -17,11 +17,12 @@ type alias ViewModel =
 
 
 createDiv address hero =
-  div []
+  div [class "hero"]
     [ a [ onClick address (ViewHero hero.id) ]
       [ div [] [ text hero.name ]
       , div [] [ text hero.title]
-      , img [src ("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/" ++ hero.image.full)] []
+      , img
+        [src ("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/" ++ hero.image.full)] []
       ]
     ]
 
@@ -34,5 +35,5 @@ view : Signal.Address Action -> ViewModel -> Html
 view address model =
   div []
     [ div [] [ text "Heroes" ]
-    , div [] (List.map (createDiv address) model.heroes)
+    , div [class "content"] (List.map (createDiv address) model.heroes)
     ]

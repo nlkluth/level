@@ -1,6 +1,16 @@
 @import 'variables';
+@import 'heroes';
 
 body {
   background: $brand;
   color: $white;
+  font-family: verdana, sans-serif;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 }
