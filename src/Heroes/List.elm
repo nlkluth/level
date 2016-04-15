@@ -19,8 +19,10 @@ type alias ViewModel =
 createDiv address hero =
   div [class "hero"]
     [ a [ onClick address (ViewHero hero.id) ]
-      [ div [] [ text hero.name ]
-      , div [] [ text hero.title]
+      [ div [class "hero-info"]
+        [ text (hero.name ++ " | ")
+        , text hero.title
+        ]
       , img
         [src ("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/" ++ hero.image.full)] []
       ]
