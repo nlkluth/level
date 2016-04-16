@@ -63,7 +63,11 @@ heroesListPage address model =
 
 heroesDetailPage : Signal.Address Action -> AppModel -> HeroID -> Html
 heroesDetailPage address model heroId =
-  let maybeHero = List.head model.heroes
+  let maybeHero =
+    model.heroes
+      |> List.filter (\hero -> hero.id == heroId)
+      |> List.head
+
   in
     case maybeHero of
       Just hero ->
