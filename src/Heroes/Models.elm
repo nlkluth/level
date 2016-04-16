@@ -1,6 +1,7 @@
 module Heroes.Models (..) where
 
 
+emptyHero : Hero
 emptyHero =
   { id = 0
   , name = ""

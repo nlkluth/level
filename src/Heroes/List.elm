@@ -13,7 +13,9 @@ import Heroes.Models exposing (..)
 
 
 type alias ViewModel =
-  { heroes : List Hero }
+  { heroes : List Hero
+  , hero : Hero
+  }
 
 
 createDiv address hero =

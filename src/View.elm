@@ -53,7 +53,10 @@ page address model =
 heroesListPage : Signal.Address Action -> AppModel -> Html
 heroesListPage address model =
   let viewModel =
-    { heroes = model.heroes }
+    { heroes = model.heroes
+    , hero = model.hero
+    }
+
   in
     Heroes.List.view (Signal.forwardTo address HeroesAction) viewModel
 
@@ -65,7 +68,10 @@ heroesDetailPage address model heroId =
     case maybeHero of
       Just hero ->
         let viewModel =
-          { hero = hero }
+          { hero = hero
+          , heroes = model.heroes
+          }
+
         in
           Heroes.Detail.view (Signal.forwardTo address HeroesAction) viewModel
 
