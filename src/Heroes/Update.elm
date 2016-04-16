@@ -50,7 +50,7 @@ update action model =
 
         (heroDetail, fx) = Heroes.Detail.init id
       in
-        ( model, Effects.map HopAction (navigateTo path) )
+        ( { model | hero = heroDetail }, Effects.map HopAction (navigateTo path) )
 
     ListHeroes ->
       let path = "/"

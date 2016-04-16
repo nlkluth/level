@@ -8,13 +8,12 @@ import Heroes.Models exposing (..)
 import Html.Events exposing (onClick)
 
 
-type alias ViewModel =
-  { hero : Hero }
+type alias ViewModel = Hero
 
 
-init :  HeroID -> ( Hero -> ViewModel, Effects Action )
+init :  HeroID -> ( ViewModel, Effects Action )
 init heroId =
-  ( ViewModel, (Heroes.Effects.fetchHeroData heroId) )
+  ( Heroes.Models.emptyHero, Heroes.Effects.fetchHeroData heroId )
 
 
 view : Signal.Address Action -> ViewModel -> Html
