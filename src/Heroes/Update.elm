@@ -4,10 +4,12 @@ import Effects exposing (Effects, Never)
 import Heroes.Actions exposing (..)
 import Heroes.Models exposing (Hero)
 import Hop.Navigate exposing (navigateTo)
+import Heroes.Detail
 
 
 type alias UpdateModel =
   { heroes : List Hero
+  , hero : Hero
   , showErrorAddress : Signal.Address String
   }
 
@@ -43,7 +45,10 @@ update action model =
       ( model, Effects.none )
 
     ViewHero id ->
-      let path = "/hero/" ++ (toString id)
+      let
+        path = "/hero/" ++ (toString id)
+
+        (heroDetail, fx) = Heroes.Detail.init id
       in
         ( model, Effects.map HopAction (navigateTo path) )
 

@@ -15,6 +15,7 @@ update action model =
       let
         updateModel =
           { heroes = model.heroes
+          , hero = model.hero
           , showErrorAddress = Signal.forwardTo actionsMailbox.address ShowError
           }
 
