@@ -26,6 +26,8 @@ update action model =
           let
             errorMessage = toString error
 
+            _ = Debug.log "\n error: \n" errorMessage
+
             fx = Signal.send model.showErrorAddress errorMessage
               |> Effects.task
               |> Effects.map TaskDone
@@ -47,10 +49,16 @@ update action model =
     ViewHero id ->
       let
         path = "/hero/" ++ (toString id)
-
         (heroDetail, fx) = Heroes.Detail.init id
+
+        fxs =
+          [ Effects.map HopAction (navigateTo path)
+          , fx
+          ]
+
+        batch = Effects.batch fxs
       in
-        ( { model | hero = heroDetail.hero }, Effects.map HopAction (navigateTo path) )
+        ( { model | hero = heroDetail.hero }, batch )
 
     ListHeroes ->
       let path = "/"
