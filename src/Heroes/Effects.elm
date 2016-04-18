@@ -26,7 +26,7 @@ fetchAll =
 
 fetchHeroUrl : HeroID -> String
 fetchHeroUrl heroId =
-  "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/" ++ toString heroId ++ "?api_key=587833f9-98ff-4cb8-92c8-ae1413a925af"
+  "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/" ++ toString heroId ++ "?champData=image&api_key=587833f9-98ff-4cb8-92c8-ae1413a925af"
 
 
 fetchAllUrl : String

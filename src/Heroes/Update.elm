@@ -40,7 +40,7 @@ update action model =
         Ok hero ->
           ( model, Effects.none )
 
-        Err errror ->
+        Err error ->
           ( model, Effects.none )
 
     TaskDone () ->
