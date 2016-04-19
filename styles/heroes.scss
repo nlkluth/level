@@ -5,6 +5,23 @@
   width: 20%;
   min-width: 120px;
 
+  &:hover {
+    .hero-detail {
+      visibility: visible;
+    }
+  }
+
+  .hero-detail {
+    visibility: hidden;
+    width: 100%;
+    background: rgba(333, 333, 333, 0.95);
+    padding: 10px;
+    position: relative;
+    top: -70px;
+    left: 120px;
+    min-height: 100px;
+  }
+
   .hero-info {
     height: 40px;
   }

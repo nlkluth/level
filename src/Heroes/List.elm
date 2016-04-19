@@ -27,6 +27,7 @@ createDiv address hero =
         ]
       , img
         [src ("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/" ++ hero.image.full)] []
+      , div [class "hero-detail"] [text "test"]
       ]
     ]
 

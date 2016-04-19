@@ -17,6 +17,19 @@ type alias HeroImage =
   { full: String }
 
 
+type alias Spells = List Spell
+
+
+type alias Spell =
+  { name : String
+  , description : String
+  , image : HeroImage
+  , resource : String
+  , maxRank : Int
+  , cost : List Int
+  }
+
+
 type alias HeroStats =
   { armor : Float
   , armorperlevel : Float
