@@ -7,6 +7,7 @@ import Heroes.Actions exposing (..)
 import Heroes.Models exposing (Hero, HeroID)
 import Html.Events exposing (onClick)
 import Html.Attributes exposing (src)
+import Heroes.Stats
 
 
 type alias ViewModel =
@@ -31,4 +32,5 @@ view address model =
     , div [] [Html.text model.hero.name]
     , img
         [src ("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/" ++ model.hero.image.full)] []
+    , Heroes.Stats.view adress model
     ]
