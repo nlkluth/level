@@ -2,11 +2,11 @@ module Heroes.Effects (..) where
 
 import Effects exposing (Effects)
 import Http
-import Json.Decode as Decode exposing ((:=))
+import Json.Decode as Decode exposing (succeed, (:=))
 import Task
 import Heroes.Models exposing (HeroID, Hero, HeroImage, HeroStats)
 import Heroes.Actions exposing (..)
-import Json.Decode.Extra exposing (apply)
+import Json.Decode.Extra exposing ((|:))
 
 
 fetchHeroData : HeroID -> Effects Action
@@ -43,14 +43,13 @@ collectionDecoder =
 
 detailDecoder : Decode.Decoder Hero
 detailDecoder =
-  Decode.object4
-    Hero
-    ("id" := Decode.int)
-    ("name" := Decode.string)
-    ("title" := Decode.string)
-    ("image" := imageDecoder)
-    --("stats" := statsDecoder)
-    --("spells" := spellsDecoder)
+  succeed Hero
+    |: ("id" := Decode.int)
+    |: ("name" := Decode.string)
+    |: ("title" := Decode.string)
+    |: ("image" := imageDecoder)
+    |: ("stats" := statsDecoder)
+    --|: ("spells" := spellsDecoder)
 
 
 memberDecoder : Decode.Decoder Hero
@@ -70,30 +69,30 @@ imageDecoder =
     ("full" := Decode.string)
 
 
---metaDecoder f = f
---  `apply` ("critperlevel" := Decode.float)
---  `apply` ("hp" := Decode.float)
---  `apply` ("hpperlevel" := Decode.float)
---  `apply` ("hpregen" := Decode.float)
---  `apply` ("hpregenperlevel" := Decode.float)
---  `apply` ("movespeed" := Decode.float)
---  `apply` ("mp" := Decode.float)
---  `apply` ("mpperlevel" := Decode.float)
---  `apply` ("mpregen" := Decode.float)
---  `apply` ("mpregenperlevel" := Decode.float)
---  `apply` ("spellblock" := Decode.float)
---  `apply` ("spellblockperlevel" := Decode.float)
+metaDecoder f = succeed f
+  |: ("critperlevel" := Decode.float)
+  |: ("hp" := Decode.float)
+  |: ("hpperlevel" := Decode.float)
+  |: ("hpregen" := Decode.float)
+  |: ("hpregenperlevel" := Decode.float)
+  |: ("movespeed" := Decode.float)
+  |: ("mp" := Decode.float)
+  |: ("mpperlevel" := Decode.float)
+  |: ("mpregen" := Decode.float)
+  |: ("mpregenperlevel" := Decode.float)
+  |: ("spellblock" := Decode.float)
+  |: ("spellblockperlevel" := Decode.float)
 
 
---statsDecoder : Decode.Decoder HeroStats
---statsDecoder =
---  metaDecoder HeroStats
---    `apply` ("armor" := Decode.float)
---    `apply` ("armorperlevel" := Decode.float)
---    `apply` ("attackdamage" := Decode.float)
---    `apply` ("attackdamageperlevel" := Decode.float)
---    `apply` ("attackrange" := Decode.float)
---    `apply` ("attackspeedoffset" := Decode.float)
---    `apply` ("attackspeedperlevel" := Decode.float)
---    `apply` ("crit" := Decode.float)
+statsDecoder : Decode.Decoder HeroStats
+statsDecoder =
+  metaDecoder HeroStats
+    |: ("armor" := Decode.float)
+    |: ("armorperlevel" := Decode.float)
+    |: ("attackdamage" := Decode.float)
+    |: ("attackdamageperlevel" := Decode.float)
+    |: ("attackrange" := Decode.float)
+    |: ("attackspeedoffset" := Decode.float)
+    |: ("attackspeedperlevel" := Decode.float)
+    |: ("crit" := Decode.float)
 
