@@ -2,7 +2,7 @@ module Heroes.Effects (..) where
 
 import Effects exposing (Effects)
 import Http
-import Json.Decode as Decode exposing (succeed, (:=))
+import Json.Decode as Decode exposing (succeed, maybe, (:=))
 import Task
 import Heroes.Models exposing (HeroID, Hero, HeroImage, HeroStats)
 import Heroes.Actions exposing (..)
@@ -48,7 +48,7 @@ detailDecoder =
     |: ("name" := Decode.string)
     |: ("title" := Decode.string)
     |: ("image" := imageDecoder)
-    |: ("stats" := statsDecoder)
+    |: ("stats" := maybe statsDecoder)
     --|: ("spells" := spellsDecoder)
 
 
@@ -68,25 +68,9 @@ imageDecoder =
     HeroImage
     ("full" := Decode.string)
 
-
-metaDecoder f = succeed f
-  |: ("critperlevel" := Decode.float)
-  |: ("hp" := Decode.float)
-  |: ("hpperlevel" := Decode.float)
-  |: ("hpregen" := Decode.float)
-  |: ("hpregenperlevel" := Decode.float)
-  |: ("movespeed" := Decode.float)
-  |: ("mp" := Decode.float)
-  |: ("mpperlevel" := Decode.float)
-  |: ("mpregen" := Decode.float)
-  |: ("mpregenperlevel" := Decode.float)
-  |: ("spellblock" := Decode.float)
-  |: ("spellblockperlevel" := Decode.float)
-
-
 statsDecoder : Decode.Decoder HeroStats
 statsDecoder =
-  metaDecoder (Just HeroStats)
+  succeed HeroStats
     |: ("armor" := Decode.float)
     |: ("armorperlevel" := Decode.float)
     |: ("attackdamage" := Decode.float)
@@ -95,4 +79,16 @@ statsDecoder =
     |: ("attackspeedoffset" := Decode.float)
     |: ("attackspeedperlevel" := Decode.float)
     |: ("crit" := Decode.float)
+    |: ("critperlevel" := Decode.float)
+    |: ("hp" := Decode.float)
+    |: ("hpperlevel" := Decode.float)
+    |: ("hpregen" := Decode.float)
+    |: ("hpregenperlevel" := Decode.float)
+    |: ("movespeed" := Decode.float)
+    |: ("mp" := Decode.float)
+    |: ("mpperlevel" := Decode.float)
+    |: ("mpregen" := Decode.float)
+    |: ("mpregenperlevel" := Decode.float)
+    |: ("spellblock" := Decode.float)
+    |: ("spellblockperlevel" := Decode.float)
 
