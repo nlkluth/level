@@ -3,17 +3,19 @@ module Heroes.Stats (..) where
 import Html exposing (Html, div, text)
 import Html.Attributes exposing (class)
 import Heroes.Actions exposing (..)
-import Heroes.Models exposing (Hero, HeroID)
+import Heroes.Models exposing (Hero, HeroStats, HeroID)
 
 
 type alias ViewModel =
   { hero : Hero }
 
 
-statsView stat =
-  div [] [text stat]
+statsView : HeroStats -> Html
+statsView stats =
+  div [] []
 
 
---view : ViewModel -> Html
-view model =
-  div [class "stats"] [model.stats.map statsView]
+view : Signal.Address Action -> ViewModel -> Html
+view adress model =
+  div [class "stats"]
+    []

@@ -18,6 +18,7 @@ type alias ViewModel =
   }
 
 
+createDiv : Signal.Address Action -> Hero -> Html
 createDiv address hero =
   div [class "hero"]
     [ a [ onClick address (ViewHero hero.id) ]

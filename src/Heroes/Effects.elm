@@ -48,7 +48,7 @@ detailDecoder =
     |: ("name" := Decode.string)
     |: ("title" := Decode.string)
     |: ("image" := imageDecoder)
-    |: ("stats" := maybe statsDecoder)
+    |: (maybe ("stats" := statsDecoder))
     --|: ("spells" := spellsDecoder)
 
 
