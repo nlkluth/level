@@ -7,9 +7,7 @@ import Heroes.Models exposing (Hero, HeroID)
 
 
 type alias ViewModel =
-  { heroes : List Hero
-  , hero : Hero
-  }
+  { hero : Hero }
 
 
 statsView stat =
@@ -18,4 +16,4 @@ statsView stat =
 
 view : ViewModel -> Html
 view model =
-  div [class "stats"] [hero.stats.map statsView]
+  div [class "stats"] [model.stats.map statsView]

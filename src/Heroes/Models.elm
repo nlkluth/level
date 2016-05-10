@@ -7,8 +7,8 @@ emptyHero =
   , name = ""
   , title = ""
   , image = { full = "" }
+  , stats = Maybe.Nothing
   }
-
 
 type alias HeroID = Int
 
@@ -59,4 +59,5 @@ type alias Hero =
   , name : String
   , title: String
   , image: HeroImage
+  , stats: Maybe.Maybe HeroStats
   }

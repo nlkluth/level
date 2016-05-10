@@ -52,7 +52,7 @@ detailDecoder =
     --|: ("spells" := spellsDecoder)
 
 
-memberDecoder : Decode.Decoder Hero
+memberDecoder : Decode.Decoder (Maybe HeroStats -> Hero)
 memberDecoder =
   Decode.object4
     Hero
@@ -86,7 +86,7 @@ metaDecoder f = succeed f
 
 statsDecoder : Decode.Decoder HeroStats
 statsDecoder =
-  metaDecoder HeroStats
+  metaDecoder (Just HeroStats)
     |: ("armor" := Decode.float)
     |: ("armorperlevel" := Decode.float)
     |: ("attackdamage" := Decode.float)
