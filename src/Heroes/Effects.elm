@@ -37,7 +37,7 @@ fetchAllUrl =
 
 collectionDecoder : Decode.Decoder (List Hero)
 collectionDecoder =
-  Decode.at ["data"] (Decode.keyValuePairs memberDecoder)
+  Decode.at ["data"] (Decode.keyValuePairs detailDecoder)
     |> Decode.map (List.map snd)
 
 
@@ -50,16 +50,6 @@ detailDecoder =
     |: ("image" := imageDecoder)
     |: ("stats" := maybe statsDecoder)
     --|: ("spells" := spellsDecoder)
-
-
-memberDecoder : Decode.Decoder (Maybe HeroStats -> Hero)
-memberDecoder =
-  Decode.object4
-    Hero
-    ("id" := Decode.int)
-    ("name" := Decode.string)
-    ("title" := Decode.string)
-    ("image" := imageDecoder)
 
 
 imageDecoder: Decode.Decoder HeroImage

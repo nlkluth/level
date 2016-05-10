@@ -14,6 +14,6 @@ statsView stat =
   div [] [text stat]
 
 
-view : ViewModel -> Html
+--view : ViewModel -> Html
 view model =
   div [class "stats"] [model.stats.map statsView]
