@@ -58,6 +58,7 @@ imageDecoder =
     HeroImage
     ("full" := Decode.string)
 
+
 statsDecoder : Decode.Decoder HeroStats
 statsDecoder =
   succeed HeroStats
