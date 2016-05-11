@@ -38,7 +38,7 @@ update action model =
     FetchHeroDone result ->
       case result of
         Ok hero ->
-          ( model, Effects.none )
+          ( { model | hero = hero }, Effects.none )
 
         Err error ->
           ( model, Effects.none )
