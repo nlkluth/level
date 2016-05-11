@@ -22,7 +22,12 @@ update action model =
         ( updatedHeroes, fx ) =
           Heroes.Update.update subAction updateModel
       in
-        ( { model | heroes = updatedHeroes.heroes }, Effects.map HeroesAction fx )
+        ( { model |
+            heroes = updatedHeroes.heroes
+          , hero = updatedHeroes.hero
+          }
+          , Effects.map HeroesAction fx
+        )
 
     NoOp ->
       ( model, Effects.none )
