@@ -12,20 +12,21 @@ type alias ViewModel =
   }
 
 
-statsView : ViewModel -> Html
-statsView model =
-  let getHeroStats (hero) =
-    case hero.stats of
-      Nothing ->
-        div [] []
-
-      Just {stats} ->
-        div [] [text (toString stats.armor)]
-  in
-    div [] [getHeroStats model.hero]
+statsView : HeroStats -> Html
+statsView stats =
+  div [] [text ("armor = " ++ toString stats.armor)]
 
 
 view : ViewModel -> Html
 view model =
-  div [class "stats"]
-    [ div [] [statsView model] ]
+  let
+    heroStats =
+      case model.hero.stats of
+        Nothing ->
+          div [] []
+
+        Just stats ->
+          statsView stats
+  in
+    div [class "stats"]
+      [ div [] [heroStats] ]

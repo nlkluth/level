@@ -63,13 +63,15 @@ heroesListPage address model =
 
 heroesDetailPage : Signal.Address Action -> AppModel -> HeroID -> Html
 heroesDetailPage address model heroId =
-  let maybeHero =
-    model.heroes
+  let maybeHero (model, heroId) =
+    if model.hero.id == heroId
+    then Just model.hero
+    else model.heroes
       |> List.filter (\hero -> hero.id == heroId)
       |> List.head
 
   in
-    case maybeHero of
+    case maybeHero (model, heroId) of
       Just hero ->
         let viewModel =
           { hero = hero
