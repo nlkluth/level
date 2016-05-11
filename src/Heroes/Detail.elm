@@ -32,5 +32,5 @@ view address model =
     , div [] [Html.text model.hero.name]
     , img
         [src ("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/" ++ model.hero.image.full)] []
-    , Heroes.Stats.view address model
+    , div [] [ Heroes.Stats.view model ]
     ]

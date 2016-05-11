@@ -7,15 +7,25 @@ import Heroes.Models exposing (Hero, HeroStats, HeroID)
 
 
 type alias ViewModel =
-  { hero : Hero }
+  { heroes : List Hero
+  , hero : Hero
+  }
 
 
-statsView : HeroStats -> Html
-statsView stats =
-  div [] []
+statsView : ViewModel -> Html
+statsView model =
+  let getHeroStats (stats) =
+    case stats of
+      Nothing ->
+        div [] []
+
+      Just {stats} ->
+        div [] [text (toString stats.armor)]
+  in
+    div [] [getHeroStats model.stats]
 
 
-view : Signal.Address Action -> ViewModel -> Html
-view adress model =
+view : ViewModel -> Html
+view model =
   div [class "stats"]
-    []
+    [ div [] [statsView model] ]
