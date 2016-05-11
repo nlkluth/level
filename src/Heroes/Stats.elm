@@ -14,15 +14,15 @@ type alias ViewModel =
 
 statsView : ViewModel -> Html
 statsView model =
-  let getHeroStats (stats) =
-    case stats of
+  let getHeroStats (hero) =
+    case hero.stats of
       Nothing ->
         div [] []
 
       Just {stats} ->
         div [] [text (toString stats.armor)]
   in
-    div [] [getHeroStats model.stats]
+    div [] [getHeroStats model.hero]
 
 
 view : ViewModel -> Html
