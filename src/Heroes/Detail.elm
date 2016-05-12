@@ -30,6 +30,7 @@ view address model =
   div []
     [ button [onClick address ListHeroes] [Html.text "Back"]
     , div [] [Html.text model.hero.name]
+    , div [] [Html.text model.hero.title]
     , img
         [src ("http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/" ++ model.hero.image.full)] []
     , Heroes.Stats.view model
