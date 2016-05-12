@@ -40,6 +40,10 @@ routerSignal =
   Signal.map RoutingAction Routing.signal
 
 
+--port fetchAllHeroes : Signal Heroes
+--port fetchAllHeroes =
+
+
 port tasks : Signal (Task.Task Never ())
 port tasks =
   app.tasks

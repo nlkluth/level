@@ -15,7 +15,7 @@ const fetchHeroList = () => {
       return fetch(heroUrl);
     }
 
-    return Promise.resolve(value)
+    return value;
   }).then((value) => {
     app.ports.heroList.send(value);
   }).catch((error) => {
@@ -23,3 +23,4 @@ const fetchHeroList = () => {
   });
 }
 
+app.ports.subscribe.fetchAllHeroes(fetchHeroList);
